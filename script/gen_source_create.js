@@ -21,17 +21,19 @@ const path = require('path')
 const fs = require('fs')
 
 ;(async ()=> {
-  
+  console.log('debug log 1');
   var filename = "源制作.md"
   var outputFilename = "source_create.html"
   var targetFile = path.join(__dirname, `../docs/${ filename }`)
+  console.log('debug log 2');
   var md = markdown()
+  console.log('debug log 3');
   var text = fs.readFileSync(targetFile).toString()
   var html = md.render(text)
-
+  console.log('debug log 4');
   html = `<!-- 自动生成, 切勿删除 -->\n\n\n` + html
 
   var writeFilePath = path.join(__dirname, `../assets/data/${ outputFilename }`)
   fs.writeFileSync(writeFilePath, html)
-
+  console.log('debug log 5');
 })()
