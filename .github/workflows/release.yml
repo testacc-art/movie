@@ -23,6 +23,7 @@ jobs:
           node-version: '14'
       - run: npm install markdown-it
       - run: node script/gen_source_create.js
+      - run: cat ./assets/data/source_create.html
       - run: flutter pub get
 #       - run: flutter pub deps
 #       - run: flutter build apk --target-platform android-arm,android-arm64,android-x64 --split-per-abi
