@@ -3,6 +3,7 @@ on:
   push:
     tags:
       - "release-v*"
+  workflow_dispatch:
 
 jobs:
   release-to-gitHub:
@@ -23,25 +24,25 @@ jobs:
       - run: npm install markdown-it
       - run: node script/gen_source_create.js
       - run: flutter pub get
-      - run: flutter pub deps
-      - run: flutter build apk --target-platform android-arm,android-arm64,android-x64 --split-per-abi
+#       - run: flutter pub deps
+#       - run: flutter build apk --target-platform android-arm,android-arm64,android-x64 --split-per-abi
 
-      # build all arch
-      - run: flutter build apk --release
+#       # build all arch
+#       - run: flutter build apk --release
 
-      - run: |
-          flutter build ios --release --no-codesign
-          cd build/ios/iphoneos
-          mkdir Payload
-          cd Payload
-          ln -s ../Runner.app
-          cd ..
-          zip -r app.ipa Payload
+#       - run: |
+#           flutter build ios --release --no-codesign
+#           cd build/ios/iphoneos
+#           mkdir Payload
+#           cd Payload
+#           ln -s ../Runner.app
+#           cd ..
+#           zip -r app.ipa Payload
       
-      - uses: softprops/action-gh-release@v1
-        with:
-          files: |
-            build/app/outputs/flutter-apk/*.apk
-            build/ios/iphoneos/app.ipa
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+#       - uses: softprops/action-gh-release@v1
+#         with:
+#           files: |
+#             build/app/outputs/flutter-apk/*.apk
+#             build/ios/iphoneos/app.ipa
+#         env:
+#           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
